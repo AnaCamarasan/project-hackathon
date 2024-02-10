@@ -1,122 +1,260 @@
-import { Select, TextInput, Button, SelectItem } from "carbon-components-react";
-import styled from "styled-components";
-import FormComponent from "../components/FormComponent";
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import { StyledFormBox } from "../components/StyledFormBox";
 
-const StyledFormContainer = styled.div`
-  max-width: 300px;
-  margin: 6rem auto;
-  border: 2px solid #000; /* Example border */
-  padding: 20px; /* Add some padding */
- 
-`;
-
-// Styled form
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Space between form items */
-  font-size: 1.2rem;
-`;
-
+const defaultTheme = createTheme()
 
 const SignUp = () => {
-  return (
-    // <StyledFormContainer>
-    //   <StyledForm>
-    //     <TextInput
-    //       id="first-name"
-    //       labelText="First Name"
-    //       placeholder="Enter your first name"
-    //       type="text"
-    //       required
-    //     />
-    //     <TextInput
-    //       id="last-name"
-    //       labelText="Last Name"
-    //       placeholder="Enter your last name"
-    //       type="text"
-    //       required
-    //     />
-    //     <TextInput
-    //       id="email"
-    //       labelText="Email"
-    //       placeholder="Enter your email"
-    //       type="email"
-    //       required
-    //     />
-    //     <TextInput
-    //       id="password"
-    //       labelText="Password"
-    //       placeholder="Enter your password"
-    //       type="password"
-    //       required
-    //     />
-    //     <TextInput
-    //       id="phone"
-    //       labelText="Phone number"
-    //       placeholder="Enter your phone number"
-    //       type="password"  
-    //       required
-    //     />
-    //     <Select
-    //       id="role"
-    //       defaultValue="Volunteer"
-    //       labelText="Role"
-    //     >
-    //       <SelectItem value="placeholder-item" text="Choose a role" />
-    //       <SelectItem value="volunteer" text="Volunteer" />
-    //       <SelectItem value="organisation" text="Organisation" />
-    //     </Select>
-    //     <TextInput
-    //       id="age"
-    //       labelText="Age"
-    //       placeholder="Enter your age"
-    //       type="age"
-    //       required
-    //     />
-    //     <Select required id="gender" defaultValue="Male" labelText="Gender">
-    //       <SelectItem value="placeholder-item" text="Choose your gender" />
-    //       <SelectItem value="male" text="Male" />
-    //       <SelectItem value="female" text="Female" />
-    //       <SelectItem value="other" text="Other" />
-    //     </Select>
-    //     <Select required id="region" defaultValue="London" labelText="Region">
-    //       <SelectItem value="placeholder-item" text="Choose your region" />
-    //       <SelectItem value="cornwall" text="Cornwall" />
-    //       <SelectItem value="cumbria" text="Cumbria" />
-    //       <SelectItem value="east_midlands" text="East Midlands" />
-    //       <SelectItem value="east_of_england" text="East of England" />
-    //       <SelectItem value="england" text="England" />
-    //       <SelectItem value="herefordshire" text="Herefordshire" />
-    //       <SelectItem value="london" text="London" />
-    //       <SelectItem value="north_east" text="North East" />
-    //       <SelectItem value="north_west" text="North West" />
-    //       <SelectItem value="northern_ireland" text="Northern Ireland" />
-    //       <SelectItem value="northumberland" text="Northumberland" />
-    //       <SelectItem value="scotland" text="Scotland" />
-    //       <SelectItem value="south_east" text="South East" />
-    //       <SelectItem value="south_west" text="South West" />
-    //       <SelectItem value="suffolk" text="Suffolk" />
-    //       <SelectItem value="wales" text="Wales" />
-    //       <SelectItem value="west_midlands" text="West Midlands" />
-    //       <SelectItem
-    //         value="yorkshire_and_the_humber"
-    //         text="Yorkshire and the Humber"
-    //       />
-    //     </Select>
+  const [email, setEmail] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
+  const [role, setRole] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [DBS, setDBS] = useState<string>("");
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
-    //     <Button
-    //       kind="primary"
-    //       style={{ backgroundColor: "rgb(0, 97, 177)", color: "white", fontSize: '1rem' }}
-    //       tabIndex={0}
-    //       type="submit"
-    //     >
-    //       Sign Up
-    //     </Button>
-    //   </StyledForm>
-    //   <p>Already have an account? <a href="/">Log in.</a></p>
-    // </StyledFormContainer>
-    <FormComponent />
+  const navigate = useNavigate();
+
+  // Handler functions
+  const handleGenderChange = (event: SelectChangeEvent) => {
+    setGender(event.target.value);
+  };
+  const handleDBSChange = (event: SelectChangeEvent) => {
+    setDBS(event.target.value);
+  };
+  const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
+    const value = event.target.value;
+    setSelectedInterests(typeof value === "string" ? value.split(",") : value);
+  };
+  const handleRegionChange = (event: SelectChangeEvent) => {
+    setRegion(event.target.value);
+  };
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    setRole(event.target.value);
+  };
+
+  const signUpTextFields = [
+    {
+      id: "firstName",
+      title: "First name",
+      value: firstName,
+      setState: setFirstName,
+    },
+    {
+      id: "lastName",
+      title: "Last Name",
+      value: lastName,
+      setState: setLastName,
+    },
+    { id: "email", title: "Email", value: email, setState: setEmail },
+    {
+      id: "password",
+      title: "Password",
+      value: password,
+      setState: setPassword,
+    },
+    { id: "age", title: "Age", value: age, setState: setAge },
+    {
+      id: "phoneNumber",
+      title: "Phone Number",
+      value: phoneNumber,
+      setState: setPhoneNumber,
+    },
+  ];
+
+  const signUpSelectFields = [
+    {
+      id: "region",
+      title: "Region",
+      content: [
+        "East Midlands",
+        "East of England",
+        "Greater London",
+        "North East England",
+        "North West England",
+        "Northern Ireland",
+        "Scotland",
+        "South East England",
+        "South West England",
+        "Wales",
+        "West Midlands",
+      ],
+      value: region,
+      setState: handleRegionChange,
+    },
+    {
+      id: "role",
+      title: "Role",
+      content: ["Volunteer", "Organisation", "Community leader"],
+      value: role,
+      setState: handleRoleChange,
+    },
+
+    {
+      id: "gender",
+      title: "Gender",
+      content: ["Male", "Female", "Other"],
+      value: gender,
+      setState: handleGenderChange,
+    },
+    {
+      id: "dbs",
+      title: "DBS",
+      content: ["Yes", "No"],
+      value: DBS,
+      setState: handleDBSChange,
+    },
+  ]
+
+  const interests = [
+    "Art",
+    "Athletics",
+    "Entertainment and Music",
+    "Travel",
+    "STEM",
+    "Food and Cooking",
+    "Nature",
+    "Fundraising",
+    "Fashion",
+    "Culture",
+    "Adventures",
+    "Gaming",
+    "Healthcare",
+  ]
+
+  // function register() {
+  //   const requestOptions = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       email: email,
+  //       firstName: firstName,
+  //       surname: lastName,
+  //       username: username,
+  //       password: password,
+  //       phone: phoneNumber,
+  //       role: role,
+  //       age: age,
+  //       gender: gender,
+  //       location: location,
+  //     }),
+  //   };
+  //   fetch("http://localhost:5000/register", requestOptions)
+  //     .then((response) => {
+  //       if (response.status !== 200)
+  //         alert("Failed to sign up: " + response.status);
+  //       else navigate("/");
+  //     })
+  //     .catch((error) => {
+  //       alert("Failed to sign up: " + error);
+  //     });
+  // }
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography style={{marginTop: '3rem'}} component="h1" variant="h4">
+            Sign up
+          </Typography>
+          <StyledFormBox component="form">
+            <Grid container spacing={3}>
+              {signUpTextFields.map((field) => (
+                <Grid item lg={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    autoFocus
+                    name={field.id}
+                    id={field.id}
+                    label={field.title}
+                    value={field.value}
+                    onChange={(e) => field.setState(e.target.value)}
+                  />
+                </Grid>
+              ))}
+              {signUpSelectFields.map((field) => (
+                <Grid item lg={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>{field.title}</InputLabel>
+                    <Select
+                      label={field.title}
+                      id={field.id}
+                      value={field.value}
+                      onChange={field.setState}
+                    >
+                      {field.content.map((elem) => (
+                        <MenuItem value={elem}>{elem}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              ))}
+              <Grid item lg={12}>
+                <FormControl fullWidth>
+                  <InputLabel>Interests</InputLabel>
+                  <Select
+                    multiple
+                    label="Interests"
+                    id="interests"
+                    value={selectedInterests}
+                    onChange={handleSelectChange}
+                  >
+                  {
+                    interests.map((interest) => (
+                      <MenuItem value={interest}>{interest}</MenuItem>
+                    ))
+                  }
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                // register();
+                navigate("/");
+              }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/" variant="body2">
+                  Already have an account? Log in
+                </Link>
+              </Grid>
+            </Grid>
+          </StyledFormBox>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 };
 
