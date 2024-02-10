@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/NavBar.tsx";
+import Login from "./pages/LogIn.tsx"; // Assuming this import
+import SignUp from "./pages/SignUp.tsx"; // Assuming this import
 import Home from "./pages/Home.tsx";
 import ForYou from "./pages/ForYou.tsx";
 import Community from "./pages/Community.tsx";
 import Tracking from "./pages/Tracking.tsx";
 import { createGlobalStyle } from "styled-components";
-
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -23,7 +24,9 @@ const App: React.FC = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/for-you" element={<ForYou />} />
           <Route path="/community" element={<Community />} />
           <Route path="/tracking" element={<Tracking />} />
