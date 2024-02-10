@@ -15,7 +15,7 @@ const GridContainer = styled.div`
 const PageTitle = styled.h1`
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 40px; // Adjust spacing as needed
+  margin-bottom: 40px;
 `;
 
 
