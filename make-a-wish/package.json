@@ -12,19 +12,26 @@
   "dependencies": {
     "@apollo/client": "^3.9.4",
     "@carbon/icons-react": "^11.35.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.15.9",
+    "@mui/material": "^5.15.9",
     "@types/react-router-dom": "^5.3.3",
     "carbon-components": "^10.58.12",
-    "carbon-components-react": "^8.49.0",
+    "carbon-components-react": "^8.50.0",
     "carbon-icons": "^7.0.7",
     "graphql": "^16.8.1",
     "node-sass": "^9.0.0",
     "normalize.css": "^8.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
     "react-router-dom": "^6.22.0",
+    "sass": "^1.70.0",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "@types/carbon-components": "^10.27.4",
     "@types/carbon-components-react": "^7.55.10",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
@@ -36,5 +43,9 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.2.2",
     "vite": "^5.1.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   }
 }
