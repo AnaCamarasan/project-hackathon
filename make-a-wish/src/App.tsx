@@ -17,12 +17,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+
 const App: React.FC = () => {
+
   return (
     <>
       <GlobalStyle />
       <Router>
-        <Navbar />
+        {window.location.pathname === '/sign-up' || window.location.pathname === '/' ? (<></>) : (<Navbar />)}
+        
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
