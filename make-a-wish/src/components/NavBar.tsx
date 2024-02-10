@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   return (
     <nav className="navbar">
       <ul className="navbar-nav">

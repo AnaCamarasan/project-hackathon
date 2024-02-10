@@ -1,4 +1,4 @@
-import React from "react";
+import  { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/NavBar.tsx";
 import Login from "./pages/LogIn.tsx"; // Assuming this import
@@ -8,6 +8,7 @@ import ForYou from "./pages/ForYou.tsx";
 import Community from "./pages/Community.tsx";
 import Tracking from "./pages/Tracking.tsx";
 import { createGlobalStyle } from "styled-components";
+import LayoutWithNavbar from "./components/LayoutWithNavbar.tsx";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -15,24 +16,21 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-`;
+`
 
-
-const App: React.FC = () => {
+const App = () => {
 
   return (
     <>
       <GlobalStyle />
       <Router>
-        {window.location.pathname === '/sign-up' || window.location.pathname === '/' ? (<></>) : (<Navbar />)}
-        
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/for-you" element={<ForYou />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/tracking" element={<Tracking />} />
+          <Route path="/home" element={<LayoutWithNavbar><Home /></LayoutWithNavbar>} />
+          <Route path="/for-you" element={<LayoutWithNavbar><ForYou /></LayoutWithNavbar>} />
+          <Route path="/community" element={<LayoutWithNavbar><Community /></LayoutWithNavbar>} />
+          <Route path="/tracking" element={<LayoutWithNavbar><Tracking /></LayoutWithNavbar>} />
         </Routes>
       </Router>
     </>
