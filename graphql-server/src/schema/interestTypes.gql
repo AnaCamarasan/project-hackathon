@@ -1,0 +1,8 @@
+type Interest {
+  id: ID!
+  interest_name: String!
+}
+
+extend type Query {
+  getInterests: [Interest!]!
+}
