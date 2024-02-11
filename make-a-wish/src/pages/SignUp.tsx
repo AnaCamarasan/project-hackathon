@@ -1,54 +1,54 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { StyledFormBox } from "../components/StyledFormBox";
+import { useState } from "react"
+import Button from "@mui/material/Button"
+import CssBaseline from "@mui/material/CssBaseline"
+import TextField from "@mui/material/TextField"
+import Link from "@mui/material/Link"
+import Grid from "@mui/material/Grid"
+import Box from "@mui/material/Box"
+import Select, { SelectChangeEvent } from "@mui/material/Select"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import InputLabel from "@mui/material/InputLabel"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { useNavigate } from "react-router-dom"
+import { StyledFormBox } from "../components/StyledFormBox"
 
 const defaultTheme = createTheme()
 
 const SignUp = () => {
-  const [email, setEmail] = useState<string>("");
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
-  const [role, setRole] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
-  const [age, setAge] = useState<string>("");
-  const [DBS, setDBS] = useState<string>("");
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [email, setEmail] = useState<string>("")
+  const [firstName, setFirstName] = useState<string>("")
+  const [lastName, setLastName] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+  const [phoneNumber, setPhoneNumber] = useState<string>("")
+  const [region, setRegion] = useState<string>("")
+  const [role, setRole] = useState<string>("")
+  const [gender, setGender] = useState<string>("")
+  const [age, setAge] = useState<string>("")
+  const [DBS, setDBS] = useState<string>("")
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([])
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // Handler functions
   const handleGenderChange = (event: SelectChangeEvent) => {
-    setGender(event.target.value);
-  };
+    setGender(event.target.value)
+  }
   const handleDBSChange = (event: SelectChangeEvent) => {
-    setDBS(event.target.value);
-  };
+    setDBS(event.target.value)
+  }
   const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
-    const value = event.target.value;
-    setSelectedInterests(typeof value === "string" ? value.split(",") : value);
-  };
+    const value = event.target.value
+    setSelectedInterests(typeof value === "string" ? value.split(",") : value)
+  }
   const handleRegionChange = (event: SelectChangeEvent) => {
-    setRegion(event.target.value);
-  };
+    setRegion(event.target.value)
+  }
   const handleRoleChange = (event: SelectChangeEvent) => {
-    setRole(event.target.value);
-  };
+    setRole(event.target.value)
+  }
 
   const signUpTextFields = [
     {
@@ -77,7 +77,7 @@ const SignUp = () => {
       value: phoneNumber,
       setState: setPhoneNumber,
     },
-  ];
+  ]
 
   const signUpSelectFields = [
     {
@@ -177,7 +177,11 @@ const SignUp = () => {
             alignItems: "center",
           }}
         >
-          <Typography style={{marginTop: '3rem'}} component="h1" variant="h4">
+          <img
+            style={{ height: "100%", width: "100%", marginTop: "1rem" }}
+            src="./../make-a-wish-1-logo-png-transparent.png"
+          />
+          <Typography style={{ marginTop: "3rem" }} component="h1" variant="h4">
             Sign up
           </Typography>
           <StyledFormBox component="form">
@@ -223,11 +227,9 @@ const SignUp = () => {
                     value={selectedInterests}
                     onChange={handleSelectChange}
                   >
-                  {
-                    interests.map((interest) => (
+                    {interests.map((interest) => (
                       <MenuItem value={interest}>{interest}</MenuItem>
-                    ))
-                  }
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>
@@ -239,7 +241,7 @@ const SignUp = () => {
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
                 // register();
-                navigate("/");
+                navigate("/")
               }}
             >
               Sign Up
@@ -255,7 +257,7 @@ const SignUp = () => {
         </Box>
       </Container>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

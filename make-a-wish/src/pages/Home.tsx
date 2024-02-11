@@ -1,7 +1,6 @@
-
-import React from 'react';
-import News from '../components/News';
-import styled from 'styled-components';
+import React from "react"
+import News from "../components/News"
+import styled from "styled-components"
 
 const GridContainer = styled.div`
   display: grid;
@@ -10,14 +9,13 @@ const GridContainer = styled.div`
   padding: 20px; // Padding around the grid
   margin: 0 auto; // Automatically adjust margins to center the grid
   max-width: 2000px; // Maximum width of the grid container, adjust as needed
-`;
+`
 
 const PageTitle = styled.h1`
   text-align: center;
   margin-top: 20px;
   margin-bottom: 40px;
-`;
-
+`
 
 const Home: React.FC = () => {
   const newsItems = [
@@ -60,8 +58,8 @@ const Home: React.FC = () => {
   ]
   return (
     <>
-      <PageTitle>Latest Wishes Fulfilled  </PageTitle>
-      
+      <PageTitle>Latest Wishes Fulfilled </PageTitle>
+
       <GridContainer>
         {newsItems.map((item, index) => (
           <News
@@ -74,7 +72,7 @@ const Home: React.FC = () => {
         ))}
       </GridContainer>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
