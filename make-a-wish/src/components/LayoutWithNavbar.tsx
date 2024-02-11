@@ -1,4 +1,4 @@
-import Navbar from "./NavBar";
+import Navbar from "./NavBar"
 
 const LayoutWithNavbar = ({ children }: any) => {
   return (
@@ -6,7 +6,7 @@ const LayoutWithNavbar = ({ children }: any) => {
       <Navbar />
       <main>{children}</main>
     </>
-  );
-};
+  )
+}
 
-export default LayoutWithNavbar;
+export default LayoutWithNavbar

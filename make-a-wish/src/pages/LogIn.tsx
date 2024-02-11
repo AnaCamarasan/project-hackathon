@@ -1,22 +1,22 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { StyledFormBox } from "../components/StyledFormBox";
+import { useState } from "react"
+import Button from "@mui/material/Button"
+import CssBaseline from "@mui/material/CssBaseline"
+import TextField from "@mui/material/TextField"
+import Link from "@mui/material/Link"
+import Grid from "@mui/material/Grid"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { useNavigate } from "react-router-dom"
+import { StyledFormBox } from "../components/StyledFormBox"
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme()
 
 const LogIn = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
- 
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+
   const navigate = useNavigate()
 
   const logInFields = [
@@ -40,7 +40,11 @@ const LogIn = () => {
             alignItems: "center",
           }}
         >
-          <Typography style={{marginTop: '3rem'}} component="h1" variant="h4">
+          <img
+            style={{ height: "100%", width: "100%", marginTop: "1rem" }}
+            src="./../make-a-wish-1-logo-png-transparent.png"
+          />
+          <Typography style={{ marginTop: "3rem" }} component="h1" variant="h4">
             Log In
           </Typography>
           <StyledFormBox component="form">
@@ -67,7 +71,7 @@ const LogIn = () => {
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
                 // register();
-                navigate("/home");
+                navigate("/home")
               }}
             >
               Log In
@@ -83,7 +87,7 @@ const LogIn = () => {
         </Box>
       </Container>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default LogIn;
+export default LogIn
