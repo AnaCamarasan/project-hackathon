@@ -1,10 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userResolvers = void 0;
+exports.resolvers = void 0;
+const interestService_1 = require("../services/interestService");
 const userService_1 = require("../services/userService");
-exports.userResolvers = {
+const regionsService_1 = require("../services/regionsService");
+exports.resolvers = {
     Query: {
-        users: async (_, __, { db }) => (0, userService_1.getUsers)(db),
+        getInterests: async (_, __, { db }) => (0, interestService_1.getInterests)(db),
+        getUsers: async (_, __, { db }) => (0, userService_1.getUsers)(db),
+        getRegions: async (_, __, { db }) => (0, regionsService_1.getRegions)(db),
     },
     Mutation: {
         createUser: async (_, args, { db }) => {

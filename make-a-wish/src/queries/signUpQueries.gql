@@ -1,0 +1,13 @@
+query GetInterests {
+  getInterests {
+    id
+    interest_name
+  }
+}
+
+query GetRegions {
+  getRegions {
+    id
+    name
+  }
+}

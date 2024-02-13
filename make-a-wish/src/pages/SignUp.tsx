@@ -14,19 +14,14 @@ import Container from "@mui/material/Container"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { StyledFormBox } from "../components/StyledFormBox"
-import { gql, useQuery } from "@apollo/client"
-import { Interest } from "../generated/graphql"
+import {
+  Interest,
+  Region,
+  useGetInterestsQuery,
+  useGetRegionsQuery,
+} from "../generated/graphql"
 
 const defaultTheme = createTheme()
-
-const GET_INTERESTS_QUERY = gql`
-  query GetInterests {
-    getInterests {
-      id
-      interest_name
-    }
-  }
-`
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>("")
@@ -43,10 +38,13 @@ const SignUp = () => {
 
   const navigate = useNavigate()
 
-  const { data, loading, error } = useQuery(GET_INTERESTS_QUERY)
+  const { data: interestsData, error: interestsError } = useGetInterestsQuery()
+  const { data: regionsData, error: regionsError } = useGetRegionsQuery()
 
-  if (loading) return <p> Loading...</p>
-  if (error) return <p> Error</p>
+  const interests = interestsData ? interestsData.getInterests : []
+  const regions = regionsData
+    ? regionsData.getRegions.map((region: Region) => region.name)
+    : []
 
   // Handler functions
   const handleGenderChange = (event: SelectChangeEvent) => {
@@ -99,19 +97,7 @@ const SignUp = () => {
     {
       id: "region",
       title: "Region",
-      content: [
-        "East Midlands",
-        "East of England",
-        "Greater London",
-        "North East England",
-        "North West England",
-        "Northern Ireland",
-        "Scotland",
-        "South East England",
-        "South West England",
-        "Wales",
-        "West Midlands",
-      ],
+      content: regions,
       value: region,
       setState: handleRegionChange,
     },
@@ -139,8 +125,7 @@ const SignUp = () => {
     },
   ]
 
-  const interests = data.getInterests
-  console.log(interests)
+  if (interestsError || regionsError) return <p> Error</p>
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -187,7 +172,7 @@ const SignUp = () => {
                       value={field.value}
                       onChange={field.setState}
                     >
-                      {field.content.map((elem) => (
+                      {field.content.map((elem: any) => (
                         <MenuItem value={elem}>{elem}</MenuItem>
                       ))}
                     </Select>

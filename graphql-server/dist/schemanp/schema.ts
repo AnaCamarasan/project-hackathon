@@ -6,10 +6,6 @@ export const typeDefs = gql`
     interest_name: String!
   }
 
-  type Query {
-    getInterests: [Interest!]!
-  }
-
   type User {
     id: ID!
     firstName: String!
@@ -21,5 +17,30 @@ export const typeDefs = gql`
     region: String
     role: String
     gender: String
+  }
+
+  type Region {
+    id: ID!
+    name: String!
+  }
+
+  type Query {
+    getInterests: [Interest!]!
+    getUsers: [User!]!
+    getRegions: [Region!]!
+  }
+
+  type Mutation {
+    createUser(
+      firstName: String!
+      lastName: String!
+      email: String!
+      password: String!
+      age: Int!
+      phoneNumber: String!
+      region: String
+      role: String
+      gender: String
+    ): User
   }
 `

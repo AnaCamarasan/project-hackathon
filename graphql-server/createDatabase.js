@@ -74,6 +74,20 @@ const db = new sqlite3.Database('./mydatabase.db', (err) => {
         }
       }
     );
+
+    db.run(
+      `CREATE TABLE IF NOT EXISTS regions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL
+    );`,
+      (err) => {
+        if (err) {
+          console.error('Error creating table regions', err);
+        } else {
+          console.log('Table regions created');
+        }
+      }
+    );
     
   }
 });

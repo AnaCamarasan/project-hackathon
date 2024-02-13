@@ -8,10 +8,6 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     interest_name: String!
   }
 
-  type Query {
-    getInterests: [Interest!]!
-  }
-
   type User {
     id: ID!
     firstName: String!
@@ -23,5 +19,30 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     region: String
     role: String
     gender: String
+  }
+
+  type Region {
+    id: ID!
+    name: String!
+  }
+
+  type Query {
+    getInterests: [Interest!]!
+    getUsers: [User!]!
+    getRegions: [Region!]!
+  }
+
+  type Mutation {
+    createUser(
+      firstName: String!
+      lastName: String!
+      email: String!
+      password: String!
+      age: Int!
+      phoneNumber: String!
+      region: String
+      role: String
+      gender: String
+    ): User
   }
 `;

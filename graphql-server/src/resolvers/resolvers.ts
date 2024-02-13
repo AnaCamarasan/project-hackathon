@@ -1,9 +1,15 @@
 import { Database } from "sqlite3"
-import { getUsers, createUser } from "../services/userService"
+import { getInterests } from "../services/interestService"
+import { createUser, getUsers } from "../services/userService"
+import { getRegions } from "../services/regionsService"
 
-export const userResolvers = {
+export const resolvers = {
   Query: {
-    users: async (_: any, __: any, { db }: { db: Database }) => getUsers(db),
+    getInterests: async (_: any, __: any, { db }: { db: Database }) =>
+      getInterests(db),
+    getUsers: async (_: any, __: any, { db }: { db: Database }) => getUsers(db),
+    getRegions: async (_: any, __: any, { db }: { db: Database }) =>
+      getRegions(db),
   },
   Mutation: {
     createUser: async (
