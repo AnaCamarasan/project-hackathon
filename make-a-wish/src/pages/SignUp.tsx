@@ -14,8 +14,19 @@ import Container from "@mui/material/Container"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { StyledFormBox } from "../components/StyledFormBox"
+import { gql, useQuery } from "@apollo/client"
+import { Interest } from "../generated/graphql"
 
 const defaultTheme = createTheme()
+
+const GET_INTERESTS_QUERY = gql`
+  query GetInterests {
+    getInterests {
+      id
+      interest_name
+    }
+  }
+`
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>("")
@@ -31,6 +42,11 @@ const SignUp = () => {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([])
 
   const navigate = useNavigate()
+
+  const { data, loading, error } = useQuery(GET_INTERESTS_QUERY)
+
+  if (loading) return <p> Loading...</p>
+  if (error) return <p> Error</p>
 
   // Handler functions
   const handleGenderChange = (event: SelectChangeEvent) => {
@@ -123,49 +139,9 @@ const SignUp = () => {
     },
   ]
 
-  const interests = [
-    "Art",
-    "Athletics",
-    "Entertainment and Music",
-    "Travel",
-    "STEM",
-    "Food and Cooking",
-    "Nature",
-    "Fundraising",
-    "Fashion",
-    "Culture",
-    "Adventures",
-    "Gaming",
-    "Healthcare",
-  ]
+  const interests = data.getInterests
+  console.log(interests)
 
-  // function register() {
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       email: email,
-  //       firstName: firstName,
-  //       surname: lastName,
-  //       username: username,
-  //       password: password,
-  //       phone: phoneNumber,
-  //       role: role,
-  //       age: age,
-  //       gender: gender,
-  //       location: location,
-  //     }),
-  //   };
-  //   fetch("http://localhost:5000/register", requestOptions)
-  //     .then((response) => {
-  //       if (response.status !== 200)
-  //         alert("Failed to sign up: " + response.status);
-  //       else navigate("/");
-  //     })
-  //     .catch((error) => {
-  //       alert("Failed to sign up: " + error);
-  //     });
-  // }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -207,6 +183,7 @@ const SignUp = () => {
                     <Select
                       label={field.title}
                       id={field.id}
+                      key={field.id}
                       value={field.value}
                       onChange={field.setState}
                     >
@@ -227,8 +204,13 @@ const SignUp = () => {
                     value={selectedInterests}
                     onChange={handleSelectChange}
                   >
-                    {interests.map((interest) => (
-                      <MenuItem value={interest}>{interest}</MenuItem>
+                    {interests.map((interest: Interest) => (
+                      <MenuItem
+                        key={interest.id}
+                        value={interest.interest_name}
+                      >
+                        {interest.interest_name}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
