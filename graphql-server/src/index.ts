@@ -1,18 +1,23 @@
 import { ApolloServer } from "apollo-server"
 import { loadFilesSync } from "@graphql-tools/load-files"
 import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge"
-import { db } from "../db/database"
+import { typeDefs } from "./schema/schema"
+import { db } from "./db/database"
 import path from "path"
+import { resolvers } from "./resolvers/interestResolver"
 
 // Load and merge type definitions
-const typesArray = loadFilesSync(path.join(__dirname, "./schema"), {
+const typesArray = loadFilesSync(path.join(__dirname, "schema"), {
   extensions: ["gql"],
 })
-const typeDefs = mergeTypeDefs(typesArray)
+
+// const typeDefs = mergeTypeDefs(typesArray)
 
 // Load and merge resolvers
-const resolversArray = loadFilesSync(path.join(__dirname, "./resolvers"))
-const resolvers = mergeResolvers(resolversArray)
+// const resolversArray = loadFilesSync(path.join(__dirname, "resolvers"))
+// const resolvers = mergeResolvers(resolversArray)
+
+//const resolvers = require("./resolvers/interestResolver")
 
 const server = new ApolloServer({
   typeDefs,

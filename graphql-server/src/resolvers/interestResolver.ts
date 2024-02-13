@@ -1,9 +1,9 @@
 import { Database } from "sqlite3"
 import { getInterests } from "../services/interestService"
 
-export const interestResolvers = {
+export const resolvers = {
   Query: {
-    interests: async (_: any, __: any, { db }: { db: Database }) =>
+    getInterests: async (_: any, __: any, { db }: { db: Database }) =>
       getInterests(db),
   },
 }
