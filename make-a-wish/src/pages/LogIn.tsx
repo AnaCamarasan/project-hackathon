@@ -10,14 +10,36 @@ import Container from "@mui/material/Container"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { StyledFormBox } from "../components/StyledFormBox"
+import { useLoginMutation } from "../generated/graphql"
 
 const defaultTheme = createTheme()
 
 const LogIn = () => {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [login, { error }] = useLoginMutation({
+    variables: {
+      email: email,
+      password: password,
+    },
+  })
 
   const navigate = useNavigate()
+
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault()
+
+  //   try {
+  //     const response = await login()
+  //     if (response.data?.login) {
+  //       navigate("/home")
+  //     } else if (error) {
+  //       console.error(error.message)
+  //     }
+  //   } catch (err) {
+  //     console.error("Login error:", err)
+  //   }
+  // }
 
   const logInFields = [
     { id: "email", title: "Email", value: email, setState: setEmail },
@@ -55,6 +77,7 @@ const LogIn = () => {
                     required
                     fullWidth
                     autoFocus
+                    type={field.id === "password" ? "password" : "email"}
                     name={field.id}
                     id={field.id}
                     label={field.title}
@@ -70,8 +93,14 @@ const LogIn = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
-                // register();
-                navigate("/home")
+                login({
+                  variables: {
+                    email: email,
+                    password: password,
+                  },
+                })
+                if (error) console.log(error.message)
+                else navigate("/home")
               }}
             >
               Log In

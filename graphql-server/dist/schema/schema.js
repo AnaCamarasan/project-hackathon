@@ -26,6 +26,17 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     name: String!
   }
 
+  type LoginData {
+    id: ID!
+    email: String!
+    password: String!
+  }
+
+  type AuthPayload {
+    token: String
+    user: LoginData
+  }
+
   type Query {
     getInterests: [Interest!]!
     getUsers: [User!]!
@@ -33,7 +44,7 @@ exports.typeDefs = (0, apollo_server_1.gql) `
   }
 
   type Mutation {
-    createUser(
+    registerUser(
       firstName: String!
       lastName: String!
       email: String!
@@ -44,5 +55,6 @@ exports.typeDefs = (0, apollo_server_1.gql) `
       role: String
       gender: String
     ): User
+    login(email: String!, password: String!): AuthPayload
   }
 `;

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "generate": "graphql-codegen",
-    "dev": "vite && npm run generate",
+    "dev": "nodemon --watch src --exec 'npm run generate' & vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

@@ -14,12 +14,9 @@ import Container from "@mui/material/Container"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { StyledFormBox } from "../components/StyledFormBox"
-import {
-  Interest,
-  Region,
-  useGetInterestsQuery,
-  useGetRegionsQuery,
-} from "../generated/graphql"
+import { Interest, Region, useGetInterestsQuery } from "../generated/graphql"
+import { useGetRegionsQuery } from "../generated/graphql"
+import { useRegisterUserMutation } from "../generated/graphql"
 
 const defaultTheme = createTheme()
 
@@ -40,6 +37,20 @@ const SignUp = () => {
 
   const { data: interestsData, error: interestsError } = useGetInterestsQuery()
   const { data: regionsData, error: regionsError } = useGetRegionsQuery()
+
+  const [register] = useRegisterUserMutation({
+    variables: {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      age: parseInt(age),
+      phoneNumber: phoneNumber,
+      region: region,
+      role: role,
+      gender: gender,
+    },
+  })
 
   const interests = interestsData ? interestsData.getInterests : []
   const regions = regionsData
@@ -153,6 +164,7 @@ const SignUp = () => {
                     required
                     fullWidth
                     autoFocus
+                    type={field.id == "password" ? "password" : ""}
                     name={field.id}
                     id={field.id}
                     label={field.title}
@@ -207,7 +219,19 @@ const SignUp = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
-                // register();
+                register({
+                  variables: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    age: parseInt(age),
+                    phoneNumber: phoneNumber,
+                    region: region,
+                    role: role,
+                    gender: gender,
+                  },
+                })
                 navigate("/")
               }}
             >

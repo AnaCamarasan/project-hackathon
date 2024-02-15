@@ -13,10 +13,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
   </ApolloProvider>
 )
-
-// ReactDOM.render(
-//   <ApolloProvider client={client}>
-//     <App />
-//   </ApolloProvider>,
-//   document.getElementById('root')
-// )

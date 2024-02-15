@@ -1,6 +1,6 @@
 import { Database } from "sqlite3"
 import { getInterests } from "../services/interestService"
-import { createUser, getUsers } from "../services/userService"
+import { registerUser, getUsers, login } from "../services/userService"
 import { getRegions } from "../services/regionsService"
 
 export const resolvers = {
@@ -12,7 +12,7 @@ export const resolvers = {
       getRegions(db),
   },
   Mutation: {
-    createUser: async (
+    registerUser: async (
       _: any,
       args: {
         firstName: string
@@ -38,7 +38,7 @@ export const resolvers = {
         role,
         gender,
       } = args
-      return createUser(
+      return registerUser(
         db,
         firstName,
         lastName,
@@ -50,6 +50,14 @@ export const resolvers = {
         role,
         gender
       )
+    },
+    login: async (
+      _: any,
+      args: { email: string; password: string },
+      { db }: { db: Database }
+    ) => {
+      const { email, password } = args
+      login(db, email, password)
     },
   },
 }

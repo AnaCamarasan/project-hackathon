@@ -11,3 +11,37 @@ query GetRegions {
     name
   }
 }
+
+mutation RegisterUser(
+  $firstName: String!
+  $lastName: String!
+  $email: String!
+  $password: String!
+  $age: Int!
+  $phoneNumber: String!
+  $region: String
+  $role: String
+  $gender: String
+) {
+  registerUser(
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    password: $password
+    age: $age
+    phoneNumber: $phoneNumber
+    region: $region
+    role: $role
+    gender: $gender
+  ) {
+    firstName
+    lastName
+    email
+    password
+    age
+    phoneNumber
+    region
+    role
+    gender
+  }
+}

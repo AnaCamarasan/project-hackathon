@@ -11,9 +11,13 @@ exports.resolvers = {
         getRegions: async (_, __, { db }) => (0, regionsService_1.getRegions)(db),
     },
     Mutation: {
-        createUser: async (_, args, { db }) => {
+        registerUser: async (_, args, { db }) => {
             const { firstName, lastName, email, password, age, phoneNumber, region, role, gender, } = args;
-            return (0, userService_1.createUser)(db, firstName, lastName, email, password, age, phoneNumber, region, role, gender);
+            return (0, userService_1.registerUser)(db, firstName, lastName, email, password, age, phoneNumber, region, role, gender);
+        },
+        login: async (_, args, { db }) => {
+            const { email, password } = args;
+            (0, userService_1.login)(db, email, password);
         },
     },
 };
