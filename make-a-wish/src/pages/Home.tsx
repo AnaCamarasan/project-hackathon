@@ -22,19 +22,19 @@ const Home: React.FC = () => {
     {
       title: "News Title 1",
       excerpt: "This is a short excerpt from the news article.",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "./../n.jpg",
       readMoreUrl: "#",
     },
     {
       title: "News Title 2",
       excerpt: "This is a short excerpt from the news article.",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "./../n.jpg",
       readMoreUrl: "#",
     },
     {
       title: "News Title 3",
       excerpt: "This is a short excerpt from the news article.",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "./../n.jpg",
       readMoreUrl: "#",
     },
     {
@@ -46,13 +46,13 @@ const Home: React.FC = () => {
     {
       title: "News Title 5",
       excerpt: "This is a short excerpt from the news article.",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "./../n.jpg",
       readMoreUrl: "#",
     },
     {
       title: "News Title 6",
       excerpt: "This is a short excerpt from the news article.",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "./../n.jpg",
       readMoreUrl: "#",
     },
   ]
